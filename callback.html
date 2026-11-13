@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authorization - CorrTech Bookkeeping</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; color: #1f2933; line-height: 1.6; }
+  h1 { color: #0b3d91; }
+  .card { background: #f5f7fa; border: 1px solid #e1e6ec; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+  code { background: #eef1f5; padding: 0.15rem 0.4rem; border-radius: 4px; word-break: break-all; }
+  .muted { color: #6b7280; font-size: 0.9rem; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+  <h1>Authorization Complete</h1>
+  <div id="success" class="card hidden">
+    <p>Your QuickBooks authorization was successful. Copy the code below and paste it into the Lindy conversation to finish connecting.</p>
+    <p><strong>Authorization code:</strong></p>
+    <p><code id="code"></code></p>
+    <p class="muted">This code is displayed only on this page in your browser. The page itself makes no network calls and does not send the code anywhere. Note that the code is part of the URL your browser loads, so it is transmitted to this site's host (GitHub Pages) as part of loading the page, as with any OAuth redirect. It expires after a few minutes and can be used only once.</p>
+  </div>
+  <div id="error" class="card hidden">
+    <p><strong>No authorization code found.</strong></p>
+    <p>This page is the OAuth callback. If you reached it directly without authorizing, return to the Lindy conversation and use the sign-in link there.</p>
+  </div>
+  <p class="muted"><a href="index.html">Back to home</a></p>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var code = params.get('code');
+      if (code) {
+        document.getElementById('code').textContent = code;
+        document.getElementById('success').classList.remove('hidden');
+      } else {
+        document.getElementById('error').classList.remove('hidden');
+      }
+    })();
+  </script>
+</body>
+</html>
